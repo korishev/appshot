@@ -1,0 +1,19 @@
+appshot "mysql_userdb" do
+  mysql name: "userdb", port: 1536, user: "pooky"
+  xfs "/mnt/mysql"
+  ext4 "/mnt/mysql/log"
+  ebs "vol-4ed40599"
+  prune min_copies: 5, max_copies: 15, retain: 5.days
+end
+
+
+appshot "main_postgresql" do
+  postgresql name: "main_postgres"
+  ext4 "/mnt/postgresql"
+  ebs "vol-deadbeef"
+  prune min_copies: 5, max_copies: 15, retain: 5.days
+end
+
+mysql_userdb.snap.prune
+main_postgresql.snap.prune
+
