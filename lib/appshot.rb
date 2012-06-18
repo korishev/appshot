@@ -1,5 +1,8 @@
 require "appshot/version"
+require "appshot/volume"
 
 class Appshot
-  # Your code goes here...
+
+  def appshot
+  end
 end
