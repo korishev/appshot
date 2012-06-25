@@ -10,10 +10,12 @@ end
 appshot "main_postgresql" do
   postgresql name: "main_postgres"
   ext4 "/mnt/postgresql"
+  ebs "vol-deadbee1"
+  ebs "vol-deadbee2"
   ebs "vol-deadbeef"
   prune min_copies: 5, max_copies: 15, retain: 5.days
 end
 
-mysql_userdb.snap.prune
+mysql_userdb.snap
 main_postgresql.snap.prune
 
