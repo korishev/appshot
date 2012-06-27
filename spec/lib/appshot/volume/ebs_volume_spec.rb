@@ -2,7 +2,7 @@ require "spec_helper"
 require "appshot"
 require "appshot/volume"
 require "appshot/volume/ebs_volume"
-
+require "timecop"
 
 describe EBSVolume do
   before do
@@ -70,15 +70,17 @@ describe EBSVolume do
 
         it "should not prune snapshots younger than the minimum age" do
           with_no_mock_delay do
-            ebs.snap(volume_id, "This is test snapshot #0", :created_at => Time.now - (4 * 86400) )
-            ebs.snap(volume_id, "This is test snapshot #1", :created_at => Time.now - (3 * 86400) )
-            ebs.snap(volume_id, "This is test snapshot #2", :created_at => Time.now - (2 * 86400) )
-            ebs.snap(volume_id, "This is test snapshot #3", :created_at => Time.now - (1 * 86400) )
-            ebs.snap(volume_id, "This is test snapshot #4", :created_at => Time.now - (3600) )
+            Timecop.freeze(Time.now - (3 * 86400))
+            ebs.snap(volume_id, "This is test snapshot #2")
+            Timecop.freeze(Time.now + 86400)
+            ebs.snap(volume_id, "This is test snapshot #3")
+            Timecop.freeze(Time.now + 86400)
+            ebs.snap(volume_id, "This is test snapshot #4")
+            Timecop.return
           end
-          ebs.snapshots_for(volumes.first.id).count.should == 5
-          ebs.prune_snapshots(volumes.first.id, 1, Time.now - (2 * 86399))
           ebs.snapshots_for(volumes.first.id).count.should == 3
+          ebs.prune_snapshots(volumes.first.id, "snapshots_to_keep" => 1, "not_after_time" => Time.now - (3 * 86400))
+          ebs.snapshots_for(volumes.first.id).count.should == 2
         end
       end
       context "without a minimum age" do
@@ -87,7 +89,7 @@ describe EBSVolume do
         it "should prune snapshots for a given volume to a snapshot count" do
           snaps
           ebs.snapshots_for(volumes.first.id).count.should == 3
-          ebs.prune_snapshots(volumes.first.id, 1)
+          ebs.prune_snapshots(volumes.first.id, "snapshots_to_keep" => 1)
           ebs.snapshots_for(volumes.first.id).count.should == 1
         end
       end
@@ -111,8 +113,6 @@ def create_volume(zone = "us-east-1" + %w(a b c d).sample, size = 20)
   end
 end
 
-# The fog library provides awesome mocks, including simulating round trip times to the
-# remote service.  Easily turn it off when not needed.
 def with_no_mock_delay
   delay = Fog::Mock.delay
   Fog::Mock.delay = 0

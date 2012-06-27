@@ -42,11 +42,12 @@ class EBSVolume < Volume
     @fog.snapshots.all("volume-id" => volume_id)
   end
 
-  def prune_snapshots(volume_id, snapshots_to_keep, not_after_time = Time.now)
-    puts "At entry, not_after_time is: #{not_after_time}"
+  #def prune_snapshots(volume_id, snapshots_to_keep, not_after_time = Time.now)
+  def prune_snapshots(volume_id, options = {})
+    snapshots_to_keep = options["snapshots_to_keep"] || 3
+    not_after_time    = options["not_after_time"]    || Time.now
     snapshots = snapshots_for(volume_id)
     (snapshots.count - snapshots_to_keep).times do
-      puts "snapshot create: #{snapshots.first.created_at} < #{not_after_time}"
       snapshots.first.destroy if snapshots.first.created_at < not_after_time
       snapshots.reload
     end
