@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Setup your appshot_conf.yml file and run appshot. 
+Setup your appshot_conf.yml file and run appshot.
 
     $ bundle exec appshot [appshot name]
 

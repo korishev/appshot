@@ -3,7 +3,7 @@ appshot "mysql_userdb" do
   xfs "/mnt/mysql"
   ext4 "/mnt/mysql/log"
   ebs "vol-4ed40599"
-  prune min_copies: 5, max_copies: 15, retain: 5.days
+  prune max_copies: 15, retain: 5.days
 end
 
 
@@ -13,7 +13,7 @@ appshot "main_postgresql" do
   ebs "vol-deadbee1"
   ebs "vol-deadbee2"
   ebs "vol-deadbeef"
-  prune min_copies: 5, max_copies: 15, retain: 5.days
+  prune max_copies: 15, retain: 5.days
 end
 
 mysql_userdb.snap
