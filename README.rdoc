@@ -1,0 +1,22 @@
+= appshot - DESCRIBE YOUR GEM
+
+Author::  Morgan Nelson (morgan\.nelson@gmail.com)
+Copyright:: Copyright (c) 2012 Morgan Nelson
+
+
+License:: mit, see LICENSE.txt
+
+
+
+Appshot coordinates application, filesystem, and storage volume operations to give you consistent snapshots.
+
+== Links
+
+* {Source on Github}[http://github.com/korishev/appshot]
+
+== Install
+
+== Examples
+
+== Contributing
+

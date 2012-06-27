@@ -11,4 +11,6 @@ describe Appshot do
   it "#appshot" do
    app.respond_to?(:appshot).should be_true
   end
+
+	describe "command line arguments"
 end

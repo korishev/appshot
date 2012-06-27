@@ -10,9 +10,9 @@ group :development do
   gem "guard"
   gem "guard-bundler"
   gem "guard-rspec"
+  gem "guard-cucumber"
   gem "redcarpet"
   gem "rb-fsevent"
-  gem "rdoc"
   gem "ruby-debug",    :platforms => :mri_18
   gem "ruby-debug19",  :platforms => :mri_19 if RUBY_VERSION < "1.9.3"
   gem "ruby_gntp"

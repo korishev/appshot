@@ -46,7 +46,8 @@ class EBSVolume < Volume
   def prune_snapshots(volume_id, options = {})
     snapshots_to_keep = options["snapshots_to_keep"] || 3
     not_after_time    = options["not_after_time"]    || Time.now
-    snapshots = snapshots_for(volume_id)
+    snapshots         = snapshots_for(volume_id)
+
     (snapshots.count - snapshots_to_keep).times do
       snapshots.first.destroy if snapshots.first.created_at < not_after_time
       snapshots.reload

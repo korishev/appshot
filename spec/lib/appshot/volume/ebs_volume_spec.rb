@@ -83,6 +83,7 @@ describe EBSVolume do
           ebs.snapshots_for(volumes.first.id).count.should == 2
         end
       end
+
       context "without a minimum age" do
         let(:snapshot_count) { 3 }
 
