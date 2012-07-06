@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'methadone'
+require 'appshot'
+
+class App
+  include Methadone::Main
+  include Methadone::CLILogging
+
+  main do |*appshot_names|
+    config_file_name = options["config_file"] || "/etc/appshot/appshot.cfg"
+    args = { :appshot_names => appshot_names }
+
+    appshot = Appshot.new(File.read(config_file_name))
+
+    appshot.run_pass(options, args)
+  end
+
+  version Appshot::VERSION
+  description "Use Appshot to take consistent snapshots of your data volumes"
+
+  use_log_level_option
+
+  on("-c CONFIG_FILE","--config_file", "Configuration File", /\S+/)
+  on("-l", "--list-appshots", "--list_appshots", "List known appshots", /\S+/)
+  arg :appshot_names, :any, "The name of one or more appshots as defined in your config file"
+
+  go!
+end
