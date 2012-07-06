@@ -6,7 +6,6 @@ appshot "mysql_userdb" do
   prune max_copies: 15, retain: 5.days
 end
 
-
 appshot "main_postgresql" do
   postgresql name: "main_postgres"
   ext4 "/mnt/postgresql"
@@ -15,7 +14,3 @@ appshot "main_postgresql" do
   ebs "vol-deadbeef"
   prune max_copies: 15, retain: 5.days
 end
-
-mysql_userdb.snap
-main_postgresql.snap.prune
-
