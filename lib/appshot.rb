@@ -16,7 +16,7 @@ class Appshot
   end
 
   def appshot_names
-    @appshots.keys
+    @appshots ? @appshots.keys : []
   end
 
   ##############
@@ -58,9 +58,13 @@ class Appshot
   end
 
   def method_missing(method_name, *args)
-    puts "called method missing on #{method_name}"
-    # when encountering a keyword we don't understand, assume it is
-    # the name of a class to instanciate, passing the args we're given to it.
-    ap method_name.contantize
+    #puts "called method missing on #{method_name}"
+    matches = Dir.glob("**/#{method_name.to_s}.rb")
+    if matches.empty?
+      super
+    else
+      load(matches.first)
+      action = Appshot.const_get("#{method_name.to_s.capitalize}").new
+    end
   end
 end

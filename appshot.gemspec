@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "fog", "~> 1.4.0"
   gem.add_runtime_dependency "methadone", "~> 1.2.1"
   gem.add_runtime_dependency "open4", "~> 1.3.0"
+  gem.add_runtime_dependency "mysql2", "~> 0.3.11"
 
   gem.add_development_dependency "aruba"
   gem.add_development_dependency "bundler",      "~> 1.0"
