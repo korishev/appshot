@@ -35,5 +35,27 @@ Feature: Appshot CLI mode
     end
     """
     When I successfully run `appshot -c /tmp/one_appshot.cfg --list`
-    Then the output should contain "There is 1 appshot configured"
+    Then the output should contain "There is one appshot configured"
+
+  Scenario: User asks for list of appshots from file with multiple appshots
+    Given a file named "/tmp/one_appshot.cfg" with:
+    """
+    appshot "mysql_userdb" do
+      mysql name: "userdb", port: 1536, user: "pooky"
+      xfs "/mnt/mysql"
+      ext4 "/mnt/mysql/log"
+      ebs "vol-4ed40599"
+      prune max_copies: 15, retain: 5.days
+    end
+
+    appshot "mysql_datadb" do
+      mysql name: "datadb", port: 1536, user: "pooky"
+      xfs "/mnt/mysql_data"
+      ext4 "/mnt/mysql/log_data"
+      ebs "vol-ded06738"
+      prune max_copies: 15, retain: 5.days
+    end
+    """
+    When I successfully run `appshot -c /tmp/one_appshot.cfg --list`
+    Then the output should contain "There are 2 appshots configured"
 

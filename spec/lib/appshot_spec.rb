@@ -40,6 +40,20 @@ describe Appshot do
     end
   end
 
+  describe "#list_appshots" do
+    context "with no appshots in config file" do
+      it "should give a 'no appshots' message" do
+        app.list_appshots.should == "There are no appshots configured"
+      end
+    end
+    context "with one appshot in config file" do
+      it "should give a 'one appshot' message" do
+        app.appshot("one") {}
+        app.list_appshots.should == "There is one appshot configured: one"
+      end
+    end
+  end
+
   describe "running an appshot" do
     it "should run appshots" do
       app.appshot("my_account") do

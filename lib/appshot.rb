@@ -43,22 +43,21 @@ class Appshot
   end
 
   def run_pass(options, args)
-    list_appshots if options["list-appshots"]
+    puts list_appshots if options["list-appshots"]
   end
 
   def list_appshots
-    puts case @appshots.count
+    case @appshots.count
     when 0
       "There are no appshots configured"
     when 1
-      "There is one appshot configured: #{@appshot.keys.first.to_s}"
+      "There is one appshot configured: #{@appshots.keys.first.to_s}"
     else
-      "There are #{@appshot.count} appshots configured: #{@appshots.keys.join(', ')}"
+      "There are #{@appshots.count} appshots configured: #{@appshots.keys.join(', ')}"
     end
   end
 
   def method_missing(method_name, *args)
-    #puts "called method missing on #{method_name}"
     matches = Dir.glob("**/#{method_name.to_s}.rb")
     if matches.empty?
       super
