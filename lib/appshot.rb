@@ -1,9 +1,13 @@
 require "appshot/version"
 require "appshot/volume"
+require "appshot/app"
+require "appshot/filesystem"
+require "awesome_print"
 
 class Appshot
   def initialize(config)
     @appshots = {}
+		@callables = []
     instance_eval(config)
   end
 
@@ -22,28 +26,60 @@ class Appshot
   ##############
   # DSL Keywords
   ##############
-  def comment(arg)
-    # do nothing.  it is a comment, after all.
-  end
-
   def appshot(appshot_name, &block)
     if block_given?
       @appshots[appshot_name.to_s] = block
     end
   end
 
+  def comment(arg)
+    # do nothing.  it is a comment, after all.
+  end
+
+  def xfs(args={})
+    @callables << Appshot::DM.new(args)
+  end
+
+  def ext4(args={})
+    @callables << Appshot::DM.new(args)
+  end
+
+  def ebs_snapshot(args={})
+    @callables << Appshot::EBS_Snapshot.new(args)
+  end
+
+	def mysql(args={})
+		@callables << Appshot::Mysql.new(args)
+	end
+
+	def ebs_prune(args={})
+	end
+
+	###############
+	# Internals
+	###############
+
   def appshots
     @appshots
   end
 
-  def execute_appshots()
+  def setup_appshots()
     @appshots.each do |appshot|
       instance_eval(&appshot.last)
     end
   end
 
+  def execute_callables
+    @callables.first.call unless @callables.empty?
+  end
+
   def run_pass(options, args)
-    puts list_appshots if options["list-appshots"]
+    if options["list-appshots"]
+      puts list_appshots if options["list-appshots"]
+    else
+      setup_appshots
+      execute_callables unless options["trial-run"]
+    end
   end
 
   def list_appshots
@@ -57,13 +93,13 @@ class Appshot
     end
   end
 
-  def method_missing(method_name, *args)
-    matches = Dir.glob("**/#{method_name.to_s}.rb")
-    if matches.empty?
-      super
-    else
-      load(matches.first)
-      action = Appshot.const_get("#{method_name.to_s.capitalize}").new
-    end
-  end
+  #def method_missing(method_name, *args)
+    #matches = Dir.glob("#{File.expand_path(File.dirname(__FILE__))}/**/#{method_name.to_s}.rb")
+    #if matches.empty?
+      #super
+    #else
+      #load(matches.first)
+      #action = Appshot.const_get("#{method_name.to_s.capitalize}").new
+    #end
+  #end
 end

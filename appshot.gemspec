@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "aruba"
   gem.add_development_dependency "bundler",      "~> 1.0"
   gem.add_development_dependency "fabrication",  "~> 2.0.1"
+  gem.add_development_dependency "pry"
   gem.add_development_dependency "rake",         "~> 0.9.0"
   gem.add_development_dependency "rake",         "~> 0.9.2"
   gem.add_development_dependency "rdoc"

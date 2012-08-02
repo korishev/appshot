@@ -14,7 +14,7 @@ Feature: Appshot CLI mode
       |--config_file  |
       |-l             |
       |--list_appshots|
-      |--list-appshots|
+      |-p             |
     And the banner should document that this app's arguments are:
       |appshot_names...| optional|
 

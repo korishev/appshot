@@ -3,19 +3,14 @@ require 'awesome_print'
 
 describe Appshot::Mysql do
   subject { Appshot::Mysql.new }
-  it "should be a Mysql object" do
-    subject.should be_a_kind_of Appshot::Mysql
-  end
+  it { should be_a_kind_of Appshot::Mysql }
+  it { subject.respond_to?(:call).should be_true }
 
-  it "should respond to #call" do
-    subject.respond_to?(:call).should be_true
-  end
-
-  describe "#call method" do
+  describe "#call" do
     before do
       Mysql2::Client.stub(:new).and_return(mysql)
     end
-    let(:mysql) { double(:mysql2, query: true) }
+    let(:mysql) { double(:mysql2, query: true, close: true) }
 
     it "should require an argument to #call" do
       lambda { subject.call }.should raise_error(ArgumentError)
@@ -41,9 +36,7 @@ describe Appshot::Mysql do
   end
 
   describe "#lock method" do
-    it "should issue the mysql command to 'flush tables with read lock'" do
-      items = []
-    end
+    pending
   end
 
   describe "#unlock method" do

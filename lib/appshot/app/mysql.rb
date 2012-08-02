@@ -25,24 +25,19 @@ class Appshot
     private
 
     def lock
-      child_pid = fork do
-        begin
-          Timeout::timeout(20) do
-            @client.query("FLUSH TABLES WITH READ LOCK")
-          end
-        rescue
-          error "Could not get MySQL tables flushed and locked before timeout."
-          @client.query("UNLOCK TABLES")
-          @client.close
+      begin
+        Timeout::timeout(20) do
+          @client.query("FLUSH TABLES WITH READ LOCK")
         end
+      rescue
+        error "Could not get MySQL tables flushed and locked before timeout."
+        @client.query("UNLOCK TABLES")
+        @client.close
       end
     end
 
     def unlock
       @client.query("UNLOCK TABLES")
-    end
-
-    def mkfifo
     end
   end
 end

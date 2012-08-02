@@ -59,7 +59,7 @@ describe Appshot do
       app.appshot("my_account") do
         comment "my account snapshot execute"
       end
-      app.execute_appshots
+      app.execute_callables
     end
 
     it "should attempt to run unknown appshots" do
@@ -67,7 +67,7 @@ describe Appshot do
         comment "This is a test"
         mysql name: "userdb", port: 1536, user: "pooky"
       end
-      app.execute_appshots
+      app.execute_callables
     end
   end
 end

@@ -4,7 +4,7 @@ require "appshot/volume"
 require "appshot/volume/ebs_volume"
 require "timecop"
 
-describe EBSVolume do
+describe Appshot::EBS_Volume do
   before do
     Fog::Compute::AWS::Mock.reset
     Fog.mock!

@@ -34,3 +34,11 @@ end
 
 task :default => [:spec,:features]
 
+
+desc "Open an irb session preloaded with Appshot"
+
+task :console do
+  sh "irb -rrubygems -I lib -r appshot.rb"
+end
+
+task :c => :console

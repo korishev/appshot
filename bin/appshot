@@ -23,7 +23,9 @@ class App
   use_log_level_option
 
   on("-c CONFIG_FILE","--config_file", "Configuration File", /\S+/)
-  on("-l", "--list-appshots", "--list_appshots", "List known appshots", /\S+/)
+  on("-l", "--list_appshots", "--list-appshots", "List known appshots", /\S+/)
+  on("-p", "Pretend mode", /\S+/)
+
   arg :appshot_names, :any, "The name of one or more appshots as defined in your config file"
 
   go!
