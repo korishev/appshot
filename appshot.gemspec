@@ -4,7 +4,7 @@ require File.expand_path('../lib/appshot/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Morgan Nelson"]
   gem.email         = ["mnelson@steele-forge.com"]
-  gem.description   = %q{AppShot takes an application aware snapshot of your drive volume using pluggable modules representing actions to be taken concerning applications, filesystems, cloud providers, etc.}
+  gem.description   = %q{AppShot takes an application aware snapshot of your drive volume (one day) using pluggable modules representing actions to be taken concerning applications, filesystems, cloud providers, etc.}
   gem.summary       = %q{Appshot takes consistent snapshots of drive volumes.}
   gem.homepage      = ""
 

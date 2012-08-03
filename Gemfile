@@ -13,8 +13,6 @@ group :development do
   gem "guard-cucumber"
   gem "redcarpet"
   gem "rb-fsevent"
-  gem "ruby-debug",    :platforms => :mri_18
-  gem "ruby-debug19",  :platforms => :mri_19 if RUBY_VERSION < "1.9.3"
   gem "ruby_gntp"
   gem "rb-readline"
   gem "debugger", :platforms => :mri_19 if RUBY_VERSION >= "1.9.3"
