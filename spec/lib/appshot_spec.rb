@@ -36,7 +36,6 @@ describe Appshot do
         comment "my_account snapshot run"
       end
       app.appshots["my_account"].should_not be_nil
-      app.appshots["my_account"].should be_a_kind_of(Proc)
     end
   end
 
@@ -58,14 +57,6 @@ describe Appshot do
     it "should run appshots" do
       app.appshot("my_account") do
         comment "my account snapshot execute"
-      end
-      app.execute_callables
-    end
-
-    it "should attempt to run unknown appshots" do
-      app.appshot("my_account") do
-        comment "This is a test"
-        mysql name: "userdb", port: 1536, user: "pooky"
       end
       app.execute_callables
     end

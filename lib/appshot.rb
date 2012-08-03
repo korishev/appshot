@@ -7,7 +7,6 @@ require "awesome_print"
 class Appshot
   def initialize(config)
     @appshots = {}
-    @appshot_callables = []
 		@callables = []
     instance_eval(config)
   end
@@ -29,12 +28,13 @@ class Appshot
   ##############
   def appshot(appshot_name, &block)
     if block_given?
-      @appshots[appshot_name.to_s] = block
+      @callables = []
+      @appshots[appshot_name.to_s] = instance_eval(&block)
     end
   end
 
   def comment(arg)
-    # do nothing.  it is a comment, after all.
+    @callables
   end
 
   def xfs(args={})
@@ -65,18 +65,10 @@ class Appshot
     @appshots
   end
 
-  def setup_appshots()
-    @appshots.each do |appshot|
-      @callables = []
-      instance_eval(&appshot.last)
-      @appshot_callables << @callables
-    end
-  end
-
   def execute_callables
-    @appshot_callables.each do |ac|
-      first_call = ac.shift
-      first_call.call(@callables) unless first_call.nil?
+    @appshots.each do |appshot, callable|
+      first_call = callable.shift
+      first_call.call(callable) unless first_call.nil?
     end
   end
 
@@ -84,7 +76,6 @@ class Appshot
     if options["list-appshots"]
       puts list_appshots if options["list-appshots"]
     else
-      setup_appshots
       execute_callables unless options["trial-run"]
     end
   end

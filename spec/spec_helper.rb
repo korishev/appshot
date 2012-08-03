@@ -1,4 +1,5 @@
 require 'awesome_print'
+require 'pry'
 
 RSpec.configure do |config|
   config.mock_framework = :rspec

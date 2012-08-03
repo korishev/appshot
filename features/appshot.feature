@@ -28,10 +28,8 @@ Feature: Appshot CLI mode
     """
     appshot "mysql_userdb" do
       mysql name: "userdb", port: 1536, user: "pooky"
-      xfs "/mnt/mysql"
-      ext4 "/mnt/mysql/log"
-      ebs "vol-4ed40599"
-      prune max_copies: 15, retain: 5.days
+      ebs_snapshot volume_id: "vol-4ed40599", aws_access_key_id: "BOO", aws_secret_access_key: "GAH"
+      ebs_prune snapshots_to_keep: 15, minimum_retention_days: 5
     end
     """
     When I successfully run `appshot -c /tmp/one_appshot.cfg --list`
@@ -42,18 +40,14 @@ Feature: Appshot CLI mode
     """
     appshot "mysql_userdb" do
       mysql name: "userdb", port: 1536, user: "pooky"
-      xfs "/mnt/mysql"
-      ext4 "/mnt/mysql/log"
-      ebs "vol-4ed40599"
-      prune max_copies: 15, retain: 5.days
+      ebs_snapshot volume_id: "vol-4ed40599", aws_access_key_id: "BOO", aws_secret_access_key: "GAH"
+      ebs_prune snapshots_to_keep: 15, minimum_retention_days: 5
     end
 
     appshot "mysql_datadb" do
       mysql name: "datadb", port: 1536, user: "pooky"
-      xfs "/mnt/mysql_data"
-      ext4 "/mnt/mysql/log_data"
-      ebs "vol-ded06738"
-      prune max_copies: 15, retain: 5.days
+      ebs_snapshot volume_id: "vol-ded06738", aws_access_key_id: "BOO", aws_secret_access_key: "GAH"
+      ebs_prune snapshots_to_keep: 15, minimum_retention_days: 5
     end
     """
     When I successfully run `appshot -c /tmp/one_appshot.cfg --list`
