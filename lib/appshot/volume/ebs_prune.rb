@@ -17,6 +17,8 @@ class Appshot
 
     def valid?
       raise ArgumentError.new "volume_id must be specified for an ebs_prune" if @volume_id.empty?
+      raise ArgumentError.new "aws_access_key_id must be specified for an ebs_prune" if @aws_access_key_id.empty?
+      raise ArgumentError.new "aws_secret_access_key must be specified for an ebs_prune" if @aws_secret_access_key.empty?
       true
     end
 

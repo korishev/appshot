@@ -7,6 +7,7 @@ require "awesome_print"
 class Appshot
   def initialize(config)
     @appshots = {}
+    @appshot_callables = []
 		@callables = []
     instance_eval(config)
   end
@@ -66,15 +67,17 @@ class Appshot
 
   def setup_appshots()
     @appshots.each do |appshot|
+      @callables = []
       instance_eval(&appshot.last)
+      @appshot_callables << @callables
     end
   end
 
   def execute_callables
-    # TODO: as it stands now, only the first set of callables will be called.  modify this to attach callables
-    # to the appshot, then call all appshot callables
-    first_call = @callables.shift
-    first_call.call(@callables) unless first_call.nil?
+    @appshot_callables.each do |ac|
+      first_call = ac.shift
+      first_call.call(@callables) unless first_call.nil?
+    end
   end
 
   def run_pass(options, args)
@@ -96,14 +99,4 @@ class Appshot
       "There are #{@appshots.count} appshots configured: #{@appshots.keys.join(', ')}"
     end
   end
-
-  #def method_missing(method_name, *args)
-    #matches = Dir.glob("#{File.expand_path(File.dirname(__FILE__))}/**/#{method_name.to_s}.rb")
-    #if matches.empty?
-      #super
-    #else
-      #load(matches.first)
-      #action = Appshot.const_get("#{method_name.to_s.capitalize}").new
-    #end
-  #end
 end
