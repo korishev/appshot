@@ -53,6 +53,7 @@ class Appshot
 	end
 
 	def ebs_prune(args={})
+    @callables << Appshot::EBS_Prune.new(args)
 	end
 
 	###############
@@ -70,7 +71,10 @@ class Appshot
   end
 
   def execute_callables
-    @callables.first.call unless @callables.empty?
+    # TODO: as it stands now, only the first set of callables will be called.  modify this to attach callables
+    # to the appshot, then call all appshot callables
+    first_call = @callables.shift
+    first_call.call(@callables) unless first_call.nil?
   end
 
   def run_pass(options, args)

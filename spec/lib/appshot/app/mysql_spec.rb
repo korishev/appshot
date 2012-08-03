@@ -34,12 +34,4 @@ describe Appshot::Mysql do
       subject.call(items)
     end
   end
-
-  describe "#lock method" do
-    pending
-  end
-
-  describe "#unlock method" do
-    pending
-  end
 end

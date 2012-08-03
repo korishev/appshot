@@ -44,14 +44,22 @@ class Appshot
 
     #def prune_snapshots(volume_id, snapshots_to_keep, not_after_time = Time.now)
     def prune_snapshots(volume_id, options = {})
-      snapshots_to_keep = options["snapshots_to_keep"] || 3
-      not_after_time    = options["not_after_time"]    || Time.now
-      snapshots         = snapshots_for(volume_id)
+      snapshots_to_keep  = options["snapshots_to_keep"] || 3
+      not_after_time     = options["not_after_time"] || Time.now
+      snapshots          = snapshots_for(volume_id)
 
       (snapshots.count - snapshots_to_keep).times do
         snapshots.first.destroy if snapshots.first.created_at < not_after_time
         snapshots.reload
       end
+    end
+
+    def day_offset(days)
+      return days if days.nil?
+      Time.now - (days * 86400)
+    end
+    def days_to_seconds(days)
+      days * 86400
     end
   end
 end
