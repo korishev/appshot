@@ -32,7 +32,6 @@ class Appshot
 
     def prune_snapshots
       not_after_time = Time.now - (@minimum_retention_days * 86400)
-      puts "attrs in prune_snapshots: #{@snapshots_to_keep}"
       ebs_volume.prune_snapshots(@volume_id, snapshots_to_keep: @snapshots_to_keep, not_after_time: not_after_time )
     end
   end
