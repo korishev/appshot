@@ -44,8 +44,8 @@ class Appshot
 
     #def prune_snapshots(volume_id, snapshots_to_keep, not_after_time = Time.now)
     def prune_snapshots(volume_id, options = {})
-      snapshots_to_keep  = options["snapshots_to_keep"] || 3
-      not_after_time     = options["not_after_time"] || Time.now
+      snapshots_to_keep  = options[:snapshots_to_keep] || 3
+      not_after_time     = options[:not_after_time] || Time.now
       snapshots          = snapshots_for(volume_id)
 
       (snapshots.count - snapshots_to_keep).times do
