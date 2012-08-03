@@ -1,4 +1,4 @@
-require_relative "ebs_volume"
+require_relative 'ebs_volume'
 
 class Appshot
   class EBS_Snapshot

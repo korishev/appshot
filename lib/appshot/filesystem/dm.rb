@@ -1,5 +1,4 @@
 require 'pathname'
-require 'awesome_print'
 
 class Appshot
   class DM

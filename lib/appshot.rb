@@ -1,8 +1,8 @@
-require "appshot/version"
-require "appshot/volume"
-require "appshot/app"
-require "appshot/filesystem"
-require "awesome_print"
+require 'appshot/version'
+require 'appshot/volume'
+require 'appshot/app'
+require 'appshot/filesystem'
+require 'awesome_print'
 
 class Appshot
   def initialize(config)

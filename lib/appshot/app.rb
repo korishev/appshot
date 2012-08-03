@@ -1,1 +1,1 @@
-require_relative "app/mysql"
+require_relative 'app/mysql'

@@ -6,10 +6,10 @@ class Appshot
     include Methadone::CLILogging
 
     def initialize(opts={})
-      @host = opts[:hostname]
-      @name = opts[:name] || "mysql"
-      @port = opts[:port] || 3306
-      @user = opts[:user] || "mysql"
+      @host = opts[:hostname] || "localhost"
+      @name = opts[:name]     || "mysql"
+      @port = opts[:port]     || 3306
+      @user = opts[:user]     || "mysql"
       @password = opts[:password]
     end
 
