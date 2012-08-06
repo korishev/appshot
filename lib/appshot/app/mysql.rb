@@ -9,7 +9,7 @@ class Appshot
       @host = opts[:hostname] || "localhost"
       @name = opts[:name]     || "mysql"
       @port = opts[:port]     || 3306
-      @user = opts[:user]     || "mysql"
+      @user = opts[:username] || "mysql"
       @password = opts[:password]
     end
 

@@ -1,14 +1,7 @@
 appshot "mysql_userdb" do
-  mysql name: "userdb", port: 1536, user: "pooky"
-  xfs mount_point: "/mnt/mysql"
-  ext4 mount_point: "/mnt/mysql/log"
-  ebs volume_id: "vol-4ed40599"
-  prune max_copies: 15, retain: 5.days
+  mysql name: "userdb", port: 1536, username: "pooky", password: "bear"
+  xfs mount_point: "/mnt/untitled"
+  ebs_snapshot volume_id: "vol-some_id", aws_access_key_id: "BOOM", aws_secret_access_key: "KEEP_IT_SECRET"
+  ebs_prune volume_id: "vol-some_id", snapshots_to_keep: 3, minimum_retention_days: 0, aws_access_key_id: "BOOM", aws_secret_access_key: "KEEP_IT_SECRET"
 end
 
-appshot "main_postgresql" do
-  postgresql name: "main_postgres"
-  ext4 mount_point: "/mnt/postgresql"
-  ebs volume_id: "vol-deadbee1"
-  prune max_copies: 15, retain: 5.days
-end

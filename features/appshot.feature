@@ -27,7 +27,7 @@ Feature: Appshot CLI mode
     Given a file named "/tmp/one_appshot.cfg" with:
     """
     appshot "mysql_userdb" do
-      mysql name: "userdb", port: 1536, user: "pooky"
+      mysql name: "userdb", port: 1536, username: "pooky"
       ebs_snapshot volume_id: "vol-4ed40599", aws_access_key_id: "BOO", aws_secret_access_key: "GAH"
       ebs_prune snapshots_to_keep: 15, minimum_retention_days: 5
     end
@@ -39,13 +39,13 @@ Feature: Appshot CLI mode
     Given a file named "/tmp/one_appshot.cfg" with:
     """
     appshot "mysql_userdb" do
-      mysql name: "userdb", port: 1536, user: "pooky"
+      mysql name: "userdb", port: 1536, username: "pooky"
       ebs_snapshot volume_id: "vol-4ed40599", aws_access_key_id: "BOO", aws_secret_access_key: "GAH"
       ebs_prune snapshots_to_keep: 15, minimum_retention_days: 5
     end
 
     appshot "mysql_datadb" do
-      mysql name: "datadb", port: 1536, user: "pooky"
+      mysql name: "datadb", port: 1536, username: "pooky"
       ebs_snapshot volume_id: "vol-ded06738", aws_access_key_id: "BOO", aws_secret_access_key: "GAH"
       ebs_prune snapshots_to_keep: 15, minimum_retention_days: 5
     end
