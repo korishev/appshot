@@ -16,7 +16,5 @@ Appshot coordinates application, filesystem, and storage volume operations to gi
 
 == Install
 
-== Examples
-
-== Contributing
+gem install appshot
 
