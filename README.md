@@ -6,23 +6,13 @@ The goal for AppShot is to provide a framework for creating pluggable providers 
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'appshot'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install appshot
+  $ gem install appshot
 
 ## Usage
 
 Setup your appshot.conf file and run appshot.
 
-    $ bundle exec appshot [appshot name]
+    $ appshot [appshot name]
 
 ## Contributing
 
