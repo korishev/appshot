@@ -1,4 +1,3 @@
-require 'mysql2'
 require 'methadone'
 
 class Appshot
@@ -14,6 +13,7 @@ class Appshot
     end
 
     def call(call_chain)
+      require 'mysql2'
       next_action = call_chain.shift
       @client = Mysql2::Client.new(username: @user, hostname: @host, password: @password, port: @port, database: @name)
 

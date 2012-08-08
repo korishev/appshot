@@ -1,5 +1,5 @@
 require 'appshot/app/mysql'
-require 'awesome_print'
+require 'mysql2'
 
 describe Appshot::Mysql do
   subject { Appshot::Mysql.new }

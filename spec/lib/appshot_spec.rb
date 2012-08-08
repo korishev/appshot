@@ -1,5 +1,4 @@
 require "appshot"
-require 'awesome_print'
 
 describe Appshot do
 

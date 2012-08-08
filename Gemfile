@@ -14,6 +14,5 @@ group :development do
   gem "rb-fsevent"
   gem "ruby_gntp"
   gem "rb-readline"
-  gem "debugger", :platforms => :mri_19 if RUBY_VERSION >= "1.9.3"
   gem "yard"
 end

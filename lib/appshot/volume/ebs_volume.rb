@@ -1,5 +1,4 @@
 require 'fog'
-require 'awesome_print'
 
 class Appshot
   class EBS_Volume

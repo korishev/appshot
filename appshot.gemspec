@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["mnelson@steele-forge.com"]
   gem.description   = %q{AppShot takes an application aware snapshot of your drive volume (one day) using pluggable modules representing actions to be taken concerning applications, filesystems, cloud providers, etc.}
   gem.summary       = %q{Appshot takes consistent snapshots of drive volumes.}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/korishev/appshot"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
@@ -17,12 +17,12 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency "fog", "~> 1.4.0"
   gem.add_runtime_dependency "methadone", "~> 1.2.1"
-  gem.add_runtime_dependency "open4", "~> 1.3.0"
-  gem.add_runtime_dependency "mysql2", "~> 0.3.11"
 
   gem.add_development_dependency "aruba"
   gem.add_development_dependency "bundler",      "~> 1.0"
+  gem.add_development_dependency "debugger"
   gem.add_development_dependency "fabrication",  "~> 2.0.1"
+  gem.add_development_dependency "mysql2", "~> 0.3.11"
   gem.add_development_dependency "pry"
   gem.add_development_dependency "rake",         "~> 0.9.0"
   gem.add_development_dependency "rake",         "~> 0.9.2"
