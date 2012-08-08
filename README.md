@@ -4,6 +4,12 @@ AppShot takes consistent snapshots of your server volumes using pluggable module
 
 The goal for AppShot is to provide a framework for creating pluggable providers for application pausing/restarting, filesystem freezeing/thawing and volume management, whether local (LVM, et. al.) or cloud (Amazon EBS, et. al.).  The software isn't quite there yet, but progress is being made.
 
+Currently only supports some Device Mapper filesystems for freezing (ext4, XFS), Mysql as an application, and Amazon EBS as the volume store.  More on the way.
+
+Support for ext3, ReiserFS and JFS in filesystem freezing should be a trivial method alias, but I haven't had time to test them.  Filesystem freezing is unnecessary when using LMV2's volume snapshot capability (the underlying device-mapper provides this functionality for free), but I haven't implemented LVM2 snapshots yet.
+
+As always, patches welcome.  I don't have much access or experience with anything but linux or OS X, so patches for any flavor of BSD or (Open)Solaris gratefully accepted.
+
 ## Installation
 
   $ gem install appshot
@@ -12,7 +18,7 @@ The goal for AppShot is to provide a framework for creating pluggable providers 
 
 Setup your appshot.conf file and run appshot.
 
-    $ appshot [appshot name]
+    $ appshot
 
 ## Contributing
 
