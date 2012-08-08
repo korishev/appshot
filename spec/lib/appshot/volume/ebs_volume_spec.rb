@@ -88,7 +88,9 @@ describe Appshot::EBS_Volume do
         let(:snapshot_count) { 3 }
 
         it "should prune snapshots for a given volume to a snapshot count" do
+          Timecop.freeze(Time.now - (3 * 86400))
           snaps
+          Timecop.return
           ebs.snapshots_for(volumes.first.id).count.should == 3
           ebs.prune_snapshots(volumes.first.id, snapshots_to_keep: 1)
           ebs.snapshots_for(volumes.first.id).count.should == 1

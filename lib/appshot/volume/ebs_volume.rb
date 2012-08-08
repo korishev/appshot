@@ -27,12 +27,7 @@ class Appshot
     end
 
     def snap(volume_id, description = "", options = {})
-      snap = @fog.snapshots.create({:volume_id => volume_id, :description => description}.merge(options))
-      while snap.state != "completed" do
-        sleep 0.5
-        snap.reload
-      end
-      snap
+      @fog.snapshots.create({:volume_id => volume_id, :description => description}.merge(options))
     end
 
     def snapshots_for(volume_id)
