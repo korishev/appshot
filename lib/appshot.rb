@@ -52,6 +52,14 @@ class Appshot
 		@callables << Appshot::Mysql.new(args)
 	end
 
+	def mongodb(args={})
+		@callables << Appshot::MongoDB.new(args)
+	end
+
+	def redis(args={})
+		@callables << Appshot::Redis.new(args)
+	end
+
 	def ebs_prune(args={})
     @callables << Appshot::EBS_Prune.new(args)
 	end
