@@ -3,7 +3,7 @@ class Appshot
 
     def initialize(opts={})
       @save_before_snapshot = opts[:save_before_snapshot] || false
-      @redis_binary         = opts[:redis_binary]         || "redis-cli"
+      @redis_binary         = opts[:database_command]     || "redis-cli"
     end
 
     def call(call_chain)
@@ -13,7 +13,7 @@ class Appshot
     end
 
     def invoke_save
-      %x[ #{redis_binary} save ]
+      %x[ #{redis_binary} bgsave ]
     end
   end
 end

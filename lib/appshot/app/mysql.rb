@@ -19,6 +19,7 @@ class Appshot
 
       lock
       next_action.call(call_chain) unless next_action.nil?
+    ensure
       unlock
     end
 
