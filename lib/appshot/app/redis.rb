@@ -13,7 +13,7 @@ class Appshot
     end
 
     def invoke_save
-      %x[ #{redis_binary} bgsave ]
+      %x[ #{@redis_binary} bgsave ]
     end
   end
 end
