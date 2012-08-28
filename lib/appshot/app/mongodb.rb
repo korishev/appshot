@@ -19,7 +19,7 @@ class Appshot
     end
 
     def unlock
-      %x[#{@mongo_binary} --host localhost:#{@port} --eval "db.$cmd.sys.unlock.findOne()" admin ]
+      %x[#{@mongo_binary} --host localhost:#{@port} --eval "db.\$cmd.sys.unlock.findOne()" admin ]
     end
   end
 end
