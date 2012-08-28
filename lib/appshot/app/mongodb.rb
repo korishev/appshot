@@ -15,11 +15,11 @@ class Appshot
     end
 
     def lock
-      %x[#{@mongo_binary} --host localhost:#{@port} --eval "db.runCommand({ fsync:1, lock:1 })" admin ]
+      %x[#{@mongo_binary} --host localhost:#{@port} --eval "db.fsyncLock()"]
     end
 
     def unlock
-      %x[#{@mongo_binary} --host localhost:#{@port} --eval "db.\$cmd.sys.unlock.findOne()" admin ]
+      %x[#{@mongo_binary} --host localhost:#{@port} --eval "db.fsyncUnlock()"]
     end
   end
 end
