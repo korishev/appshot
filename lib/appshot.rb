@@ -6,7 +6,7 @@ require 'appshot/filesystem'
 class Appshot
   def initialize(config)
     @appshots = {}
-		@callables = []
+    @callables = []
     instance_eval(config)
   end
 
@@ -48,25 +48,25 @@ class Appshot
     @callables << Appshot::EBS_Snapshot.new(args)
   end
 
-	def mysql(args={})
-		@callables << Appshot::Mysql.new(args)
-	end
+  def mysql(args={})
+    @callables << Appshot::Mysql.new(args)
+  end
 
-	def mongodb(args={})
-		@callables << Appshot::MongoDB.new(args)
-	end
+  def mongodb(args={})
+    @callables << Appshot::MongoDB.new(args)
+  end
 
-	def redis(args={})
-		@callables << Appshot::Redis.new(args)
-	end
+  def redis(args={})
+    @callables << Appshot::Redis.new(args)
+  end
 
-	def ebs_prune(args={})
+  def ebs_prune(args={})
     @callables << Appshot::EBS_Prune.new(args)
-	end
+  end
 
-	###############
-	# Internals
-	###############
+  ###############
+  # Internals
+  ###############
 
   def appshots
     @appshots
