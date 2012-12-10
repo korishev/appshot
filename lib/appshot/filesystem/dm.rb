@@ -12,6 +12,7 @@ class Appshot
 
       freeze
       next_action.call(call_chain) unless next_action.nil?
+    ensure
       unfreeze
     end
 
